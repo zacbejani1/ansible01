@@ -1,0 +1,44 @@
+---
+- hosts: all
+  tasks:
+  - name: install updates on Redhat
+    tags: allways
+    yum:
+      update_only: yes
+      update_cache: yes
+    when: ansible_distribution == "RedHat"
+
+  - name: install updates on ubuntu
+    tags: allways
+    apt:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+- hosts: ubuntuservers
+  tasks:
+
+  - name: install apache2 package on Ubuntu
+    when: ansible_distribution == "Ubuntu"    
+    apt:
+      name:
+        - apache2
+        - libapache2-mod-php
+      state: latest
+- hosts: redhatservers
+  tasks:
+ 
+  - name: Install apache package on Redhat
+    tags: redhat
+    when: ansible_distribution == "RedHat"
+    yum:
+      name:
+        - httpd
+        - php 
+      state: latest        
+- hosts: redhatservers
+  tasks:
+  - name: install samba package
+    package:
+      name: samba
+      state: latest      

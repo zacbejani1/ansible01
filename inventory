@@ -1,3 +1,7 @@
+
+[ubuntuservers]
 cb9d81aa1c2c.mylabserver.com
-cb9d81aa1c3c.mylabserver.com
+
+
+[redhatservers]
 cb9d81aa1c1c.mylabserver.com
